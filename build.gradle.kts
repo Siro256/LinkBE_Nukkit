@@ -17,21 +17,12 @@ repositories {
     maven {url = URI("https://mvnrepository.com/artifact/mysql/mysql-connector-java")}
 }
 
-val embed: Configuration by configurations.creating
-
 dependencies {
     implementation("cn.nukkit:nukkit:1.0-SNAPSHOT")
     implementation("mysql:mysql-connector-java:8.0.16")
     testCompile("junit", "junit", "4.12")
-
 }
 
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
-}
-
-tasks.jar {
-    val embedConfiguration = embed.copy()
-
-    from(embedConfiguration.map { if (it.isDirectory) it else zipTree(it) })
 }

@@ -5,6 +5,7 @@ import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerJoinEvent;
 
+import cn.nukkit.utils.TextFormat;
 import net.siro256yt.nukkitpl.linkbe.LinkBE;
 import net.siro256yt.nukkitpl.linkbe.database.CreateTmpData;
 import net.siro256yt.nukkitpl.linkbe.util.SecureRandomString;
@@ -32,9 +33,9 @@ public class PlayerJoinListener implements Listener {
         }
 
         if (done == true) {
-            player.kick("Your code: " + code + "\n" +
+            player.kick("Your code: " + TextFormat.RED +code + TextFormat.RESET + "\n" +
                                 "1. Join to auth.dev-jp.net by Java Edition\n" +
-                                "2. Enter a command /auth " + code, false);
+                                "2. Enter a command " + TextFormat.RED + "/auth " + code, false);
         } else {
             player.kick("Internal error. Please retry again.", false);
         }
