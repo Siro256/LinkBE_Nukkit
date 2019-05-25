@@ -21,6 +21,8 @@ public class TmpData {
         preparedStatement.setString(2, code);
         preparedStatement.setTimestamp(3, timestamp);
 
+        int resultSet  = preparedStatement.executeUpdate();
+
         preparedStatement.close();
         conn.close();
     }
@@ -28,7 +30,7 @@ public class TmpData {
     public static HashMap<String, String> searchTmpData(String xuid) throws Exception {
         HashMap<String, String> searchData = new HashMap<String, String>();
         String resultCode = null;
-        Timestamp resultTime;
+        Timestamp resultTime = null;
         String resultTimeString = null;
 
         Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -63,6 +65,8 @@ public class TmpData {
         PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM tmpdata WHERE xuid = ?");
 
         preparedStatement.setString(1, xuid);
+
+        int resultSet  = preparedStatement.executeUpdate();
 
         preparedStatement.close();
         conn.close();

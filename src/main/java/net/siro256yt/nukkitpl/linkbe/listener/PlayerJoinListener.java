@@ -32,11 +32,11 @@ public class PlayerJoinListener implements Listener {
         String code = SecureRandomString.generate(8);
         String searchCode = null;
         String searchTimeString;
-        Date nowTime = null;
-        Date searchTime = null;
+        Date nowTime;
+        Date searchTime;
         long nowTimeLong;
         long searchTimeLong;
-        long minDiff;
+        long minDiff = 0;
         boolean create;
         boolean search;
         boolean isCreated = true;
@@ -50,16 +50,16 @@ public class PlayerJoinListener implements Listener {
 
             nowTime = simpleDateFormat.parse(String.valueOf(nowTimeTimestamp));
 
+            nowTimeLong = nowTime.getTime();
+            searchTimeLong = searchTime.getTime();
+            minDiff = (nowTimeLong - searchTimeLong) / (1000*60);
+
             search = true;
         } catch (Exception e) {
             e.printStackTrace();
-            player.kick("Internal error. Please retry again.", false);
             search = false;
+            isCreated = false;
         }
-
-        nowTimeLong = nowTime.getTime();
-        searchTimeLong = searchTime.getTime();
-        minDiff = (nowTimeLong - searchTimeLong) / (1000*60);
 
         if (search) {
             if (31 <= minDiff) {
@@ -75,7 +75,7 @@ public class PlayerJoinListener implements Listener {
                             "1. Join to auth.dev-jp.net by Java Edition\n" +
                             "2. Enter a command " + TextFormat.RED + "/auth " + searchCode, false);
             }
-
+        }
             if (!isCreated) {
                 try {
                     new TmpData().createTmpData(xuid, code);
@@ -94,8 +94,5 @@ public class PlayerJoinListener implements Listener {
                     player.kick("Internal error. Please retry again.", false);
                 }
             }
-        } else {
-            player.kick("Internal error. Please retry again.", false);
-        }
     }
 }
