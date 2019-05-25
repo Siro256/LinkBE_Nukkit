@@ -27,7 +27,7 @@ public class PlayerJoinListener implements Listener {
     @EventHandler
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        HashMap<String, String> searchData = new HashMap<String, String>();
+        HashMap<String, String> searchData;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.JAPANESE);
         Timestamp nowTimeTimestamp = new Timestamp(Calendar.getInstance().getTimeInMillis() - 1000*60*60*24);
         String xuid = player.getLoginChainData().getXUID();
@@ -63,8 +63,8 @@ public class PlayerJoinListener implements Listener {
         searchTimeLong = searchTime.getTime();
         minDiff = (nowTimeLong - searchTimeLong) / (1000*60);
 
-        if (search = true) {
-            if (31 >= minDiff) {
+        if (search == true) {
+            if (31 <= minDiff) {
                 try {
                     TmpData.deleteTmpData(xuid);
                     isCreated = false;
@@ -72,9 +72,13 @@ public class PlayerJoinListener implements Listener {
                     player.kick("Internal error. Please retry again.", false);
                     e.printStackTrace();
                 }
+            } else {
+                    player.kick("Your code: " + TextFormat.RED + searchCode + TextFormat.RESET + "\n" +
+                            "1. Join to auth.dev-jp.net by Java Edition\n" +
+                            "2. Enter a command " + TextFormat.RED + "/auth " + searchCode, false);
             }
 
-            if (isCreated = false) {
+            if (isCreated == false) {
                 try {
                     new TmpData().createTmpData(xuid, code);
                     create = true;
@@ -84,17 +88,13 @@ public class PlayerJoinListener implements Listener {
                     create = false;
                 }
 
-                if (create = true) {
+                if (create == true) {
                     player.kick("Your code: " + TextFormat.RED + code + TextFormat.RESET + "\n" +
                             "1. Join to auth.dev-jp.net by Java Edition\n" +
                             "2. Enter a command " + TextFormat.RED + "/auth " + code, false);
                 } else {
                     player.kick("Internal error. Please retry again.", false);
                 }
-            } else {
-                player.kick("Your code: " + TextFormat.RED + searchCode + TextFormat.RESET + "\n" +
-                                    "1. Join to auth.dev-jp.net by Java Edition\n" +
-                                    "2. Enter a command " + TextFormat.RED + "/auth " + searchCode, false);
             }
         } else {
             player.kick("Internal error. Please retry again.", false);
