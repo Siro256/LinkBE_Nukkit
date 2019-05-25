@@ -30,7 +30,7 @@ public class TmpData {
     public static HashMap<String, String> searchTmpData(String xuid) throws Exception {
         HashMap<String, String> searchData = new HashMap<String, String>();
         String resultCode = null;
-        Timestamp resultTime = null;
+        Timestamp resultTime;
         String resultTimeString = null;
 
         Class.forName("com.mysql.jdbc.Driver").newInstance();

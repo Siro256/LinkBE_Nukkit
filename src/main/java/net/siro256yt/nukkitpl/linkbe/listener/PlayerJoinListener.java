@@ -39,8 +39,8 @@ public class PlayerJoinListener implements Listener {
         long nowTimeLong;
         long searchTimeLong;
         long minDiff;
-        boolean create = false;
-        boolean search = false;
+        boolean create;
+        boolean search;
         boolean isCreated = true;
 
         try {
