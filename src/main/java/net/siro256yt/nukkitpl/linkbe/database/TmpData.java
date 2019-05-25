@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class TmpData {
-    public static void createTmpData(String xuid, String code) throws Exception {
+    public static int createTmpData(String xuid, String code) throws Exception {
         Timestamp timestamp = new Timestamp(Calendar.getInstance().getTimeInMillis() - 1000*60*60*24);
 
         Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -21,14 +21,17 @@ public class TmpData {
         preparedStatement.setString(2, code);
         preparedStatement.setTimestamp(3, timestamp);
 
+        int resultSet  = preparedStatement.executeUpdate();
+
         preparedStatement.close();
         conn.close();
+        return resultSet;
     }
 
     public static HashMap<String, String> searchTmpData(String xuid) throws Exception {
         HashMap<String, String> searchData = new HashMap<String, String>();
         String resultCode = null;
-        Timestamp resultTime;
+        Timestamp resultTime = null;
         String resultTimeString = null;
 
         Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -55,7 +58,7 @@ public class TmpData {
         return searchData;
     }
 
-    public static void deleteTmpData(String xuid) throws Exception {
+    public static int deleteTmpData(String xuid) throws Exception {
         Class.forName("com.mysql.jdbc.Driver").newInstance();
 
         Connection conn = DriverManager.getConnection("jdbc:mysql://" + LinkBE.db_host + "/" + LinkBE.db_name + "?user=" + LinkBE.db_user + "&password=" + LinkBE.db_pass);
@@ -64,7 +67,11 @@ public class TmpData {
 
         preparedStatement.setString(1, xuid);
 
+        int resultSet  = preparedStatement.executeUpdate();
+
         preparedStatement.close();
         conn.close();
+
+        return resultSet;
     }
 }

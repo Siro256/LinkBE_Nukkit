@@ -30,6 +30,6 @@ public class LinkBE extends PluginBase {
 
     @Override
     public void onDisable() {
-        this.getLogger().info(TextFormat.GREEN + "I've been enabled!");
+        this.getLogger().info(TextFormat.GREEN + "I've been disabled!");
     }
 }
