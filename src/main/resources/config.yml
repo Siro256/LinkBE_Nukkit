@@ -1,0 +1,7 @@
+config-version: 'v1'
+
+db-host: 'localhost'
+db-port: '3306'
+db-name: 'linkbe'
+db-user: 'root'
+db-pass: ''
