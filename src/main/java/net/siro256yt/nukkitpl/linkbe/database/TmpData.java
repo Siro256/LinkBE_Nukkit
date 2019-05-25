@@ -21,8 +21,6 @@ public class TmpData {
         preparedStatement.setString(2, code);
         preparedStatement.setTimestamp(3, timestamp);
 
-        int resultSet  = preparedStatement.executeUpdate();
-
         preparedStatement.close();
         conn.close();
     }

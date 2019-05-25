@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 public class PlayerJoinListener implements Listener {
-    private final LinkBE plugin;
+    LinkBE plugin;
 
     public PlayerJoinListener(LinkBE plugin) {
         this.plugin = plugin;
