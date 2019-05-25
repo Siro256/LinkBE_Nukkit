@@ -5,6 +5,7 @@ import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerJoinEvent;
 
+import cn.nukkit.plugin.Plugin;
 import cn.nukkit.utils.TextFormat;
 import net.siro256yt.nukkitpl.linkbe.LinkBE;
 import net.siro256yt.nukkitpl.linkbe.database.TmpData;
@@ -18,10 +19,13 @@ import java.util.HashMap;
 import java.util.Locale;
 
 public class PlayerJoinListener implements Listener {
-    private LinkBE plugin;
+    //private final LinkBE plugin;
 
-    public PlayerJoinListener(LinkBE plugin) {
-        this.plugin = plugin;
+    //public PlayerJoinListener(LinkBE plugin) {
+        //this.plugin = plugin;
+    //}
+    public PlayerJoinListener(Plugin plugin) {
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler
