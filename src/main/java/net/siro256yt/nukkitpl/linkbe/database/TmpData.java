@@ -31,7 +31,7 @@ public class TmpData {
         HashMap<String, String> searchData = new HashMap<String, String>();
         String resultCode = null;
         Timestamp resultTime = null;
-        String resultTimeString = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(resultTime);
+        String resultTimeString = null;
 
         Class.forName("com.mysql.jdbc.Driver").newInstance();
 
@@ -46,6 +46,7 @@ public class TmpData {
         while (resultSet.next()) {
             resultCode = resultSet.getString("code");
             resultTime = resultSet.getTimestamp("time");
+            resultTimeString =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(resultTime);
         }
         searchData.put("searchCode", resultCode);
         searchData.put("searchTimeString", resultTimeString);
