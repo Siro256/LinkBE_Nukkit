@@ -64,8 +64,6 @@ public class TmpData {
 
         preparedStatement.setString(1, xuid);
 
-        int resultSet  = preparedStatement.executeUpdate();
-
         preparedStatement.close();
         conn.close();
     }

@@ -25,8 +25,6 @@ public class LinkBE extends PluginBase {
         db_user = getConfig().get("db-user", "root");
         db_pass = getConfig().get("db-pass", "");
 
-
-        //this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
         new PlayerJoinListener(this);
     }
 

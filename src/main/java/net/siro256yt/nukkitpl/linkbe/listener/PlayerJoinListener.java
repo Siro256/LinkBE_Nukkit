@@ -7,7 +7,6 @@ import cn.nukkit.event.player.PlayerJoinEvent;
 
 import cn.nukkit.plugin.Plugin;
 import cn.nukkit.utils.TextFormat;
-import net.siro256yt.nukkitpl.linkbe.LinkBE;
 import net.siro256yt.nukkitpl.linkbe.database.TmpData;
 import net.siro256yt.nukkitpl.linkbe.util.SecureRandomString;
 
@@ -19,11 +18,6 @@ import java.util.HashMap;
 import java.util.Locale;
 
 public class PlayerJoinListener implements Listener {
-    //private final LinkBE plugin;
-
-    //public PlayerJoinListener(LinkBE plugin) {
-        //this.plugin = plugin;
-    //}
     public PlayerJoinListener(Plugin plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
@@ -67,7 +61,7 @@ public class PlayerJoinListener implements Listener {
         searchTimeLong = searchTime.getTime();
         minDiff = (nowTimeLong - searchTimeLong) / (1000*60);
 
-        if (search == true) {
+        if (search) {
             if (31 <= minDiff) {
                 try {
                     TmpData.deleteTmpData(xuid);
@@ -82,7 +76,7 @@ public class PlayerJoinListener implements Listener {
                             "2. Enter a command " + TextFormat.RED + "/auth " + searchCode, false);
             }
 
-            if (isCreated == false) {
+            if (!isCreated) {
                 try {
                     new TmpData().createTmpData(xuid, code);
                     create = true;
@@ -92,7 +86,7 @@ public class PlayerJoinListener implements Listener {
                     create = false;
                 }
 
-                if (create == true) {
+                if (create) {
                     player.kick("Your code: " + TextFormat.RED + code + TextFormat.RESET + "\n" +
                             "1. Join to auth.dev-jp.net by Java Edition\n" +
                             "2. Enter a command " + TextFormat.RED + "/auth " + code, false);
