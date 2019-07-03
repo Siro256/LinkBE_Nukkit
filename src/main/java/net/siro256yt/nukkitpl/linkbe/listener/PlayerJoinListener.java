@@ -3,11 +3,12 @@ package net.siro256yt.nukkitpl.linkbe.listener;
 import cn.nukkit.Player;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
-import cn.nukkit.event.player.PlayerJoinEvent;
 
+import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.plugin.Plugin;
 import cn.nukkit.utils.TextFormat;
 import net.siro256yt.nukkitpl.linkbe.database.TmpData;
+import net.siro256yt.nukkitpl.linkbe.util.CodeLength;
 import net.siro256yt.nukkitpl.linkbe.util.SecureRandomString;
 
 import java.sql.Timestamp;
@@ -29,7 +30,7 @@ public class PlayerJoinListener implements Listener {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.JAPANESE);
         Timestamp nowTimeTimestamp = new Timestamp(Calendar.getInstance().getTimeInMillis() - 1000*60*60*24);
         String xuid = player.getLoginChainData().getXUID();
-        String code = SecureRandomString.generate(8);
+        String code = SecureRandomString.generate(CodeLength.check());
         String searchCode = null;
         String searchTimeString;
         Date nowTime;
@@ -72,7 +73,7 @@ public class PlayerJoinListener implements Listener {
                 }
             } else {
                     player.kick("Your code: " + TextFormat.RED + searchCode + TextFormat.RESET + "\n" +
-                            "1. Join to auth.dev-jp.net by Java Edition\n" +
+                            "1. Join to " + TextFormat.BLUE + "auth.dev-jp.net" + TextFormat.RESET + " by Java Edition\n" +
                             "2. Enter a command " + TextFormat.RED + "/auth " + searchCode, false);
             }
         }
@@ -88,7 +89,7 @@ public class PlayerJoinListener implements Listener {
 
                 if (create) {
                     player.kick("Your code: " + TextFormat.RED + code + TextFormat.RESET + "\n" +
-                            "1. Join to auth.dev-jp.net by Java Edition\n" +
+                            "1. Join to " + TextFormat.BLUE + "auth.dev-jp.net" + TextFormat.RESET + " by Java Edition\n" +
                             "2. Enter a command " + TextFormat.RED + "/auth " + code, false);
                 } else {
                     player.kick("Internal error. Please retry again.", false);
