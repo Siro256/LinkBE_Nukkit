@@ -1,6 +1,6 @@
 name: LinkBE
 main: net.siro256yt.nukkitpl.linkbe.LinkBE
-version: 0.1.0-BETA
+version: 1.0.0-RELEASE
 api: ["1.0.5"]
 load: POSTWORLD
 author: Siro_256

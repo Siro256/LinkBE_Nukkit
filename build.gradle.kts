@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "net.siro256yt.nukkitpl.linkbe"
-version = "0.1.0-BETA"
+version = "1.0.0-RELEASE"
 
 project.sourceSets{
     getByName("main") { java.srcDir("src/main/java") }
