@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class TmpData {
+    //一時コード作成
     public static int createTmpData(String xuid, String code) throws Exception {
         Timestamp timestamp = new Timestamp(Calendar.getInstance().getTimeInMillis() - 1000*60*60*24);
 
@@ -28,6 +29,7 @@ public class TmpData {
         return resultSet;
     }
 
+    //一時コードを取得
     public static HashMap<String, String> searchTmpData(String xuid) throws Exception {
         HashMap<String, String> searchData = new HashMap<String, String>();
         String resultCode = null;
@@ -58,6 +60,7 @@ public class TmpData {
         return searchData;
     }
 
+    //一時コードを削除
     public static int deleteTmpData(String xuid) throws Exception {
         Class.forName("com.mysql.jdbc.Driver").newInstance();
 

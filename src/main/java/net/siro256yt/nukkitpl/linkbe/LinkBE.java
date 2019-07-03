@@ -11,6 +11,7 @@ public class LinkBE extends PluginBase {
     public static String db_name;
     public static String db_user;
     public static String db_pass;
+    public static String code_length;
 
     @Override
     public void onEnable() {
@@ -24,6 +25,8 @@ public class LinkBE extends PluginBase {
         db_name = getConfig().get("db-name", "linkbe");
         db_user = getConfig().get("db-user", "root");
         db_pass = getConfig().get("db-pass", "");
+        code_length = getConfig().get("code-length", "8");
+
 
         new PlayerJoinListener(this);
     }
