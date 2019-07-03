@@ -3,11 +3,12 @@ package net.siro256yt.nukkitpl.linkbe.listener;
 import cn.nukkit.Player;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
-import cn.nukkit.event.player.PlayerJoinEvent;
 
+import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.plugin.Plugin;
-import cn.nukkit.utils.TextFormat;
 import net.siro256yt.nukkitpl.linkbe.database.TmpData;
+import net.siro256yt.nukkitpl.linkbe.util.CodeLength;
+import net.siro256yt.nukkitpl.linkbe.util.Kick;
 import net.siro256yt.nukkitpl.linkbe.util.SecureRandomString;
 
 import java.sql.Timestamp;
@@ -29,7 +30,7 @@ public class PlayerJoinListener implements Listener {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.JAPANESE);
         Timestamp nowTimeTimestamp = new Timestamp(Calendar.getInstance().getTimeInMillis() - 1000*60*60*24);
         String xuid = player.getLoginChainData().getXUID();
-        String code = SecureRandomString.generate(8);
+        String code = SecureRandomString.generate(CodeLength.check());
         String searchCode = null;
         String searchTimeString;
         Date nowTime;
@@ -67,13 +68,11 @@ public class PlayerJoinListener implements Listener {
                     TmpData.deleteTmpData(xuid);
                     isCreated = false;
                 } catch (Exception e) {
-                    player.kick("Internal error. Please retry again.", false);
+                    Kick.error(player);
                     e.printStackTrace();
                 }
             } else {
-                    player.kick("Your code: " + TextFormat.RED + searchCode + TextFormat.RESET + "\n" +
-                            "1. Join to auth.dev-jp.net by Java Edition\n" +
-                            "2. Enter a command " + TextFormat.RED + "/auth " + searchCode, false);
+                Kick.normal(player, searchCode);
             }
         }
             if (!isCreated) {
@@ -82,16 +81,14 @@ public class PlayerJoinListener implements Listener {
                     create = true;
                 } catch (Exception e) {
                     e.printStackTrace();
-                    player.kick("Internal error. Please retry again.", false);
+                    Kick.error(player);
                     create = false;
                 }
 
                 if (create) {
-                    player.kick("Your code: " + TextFormat.RED + code + TextFormat.RESET + "\n" +
-                            "1. Join to auth.dev-jp.net by Java Edition\n" +
-                            "2. Enter a command " + TextFormat.RED + "/auth " + code, false);
+                    Kick.normal(player, code);
                 } else {
-                    player.kick("Internal error. Please retry again.", false);
+                    Kick.error(player);
                 }
             }
     }
