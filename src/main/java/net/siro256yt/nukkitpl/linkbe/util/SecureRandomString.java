@@ -4,7 +4,7 @@ import java.security.SecureRandom;
 
 public class SecureRandomString {
 
-    public static String generate (int length) {
+    public static String generate(int length) {
         int length2 = length / 2;
         byte bytes[] = new byte[length2];
         StringBuffer buffer = new StringBuffer();

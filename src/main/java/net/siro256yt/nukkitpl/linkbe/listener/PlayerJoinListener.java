@@ -6,9 +6,9 @@ import cn.nukkit.event.Listener;
 
 import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.plugin.Plugin;
-import cn.nukkit.utils.TextFormat;
 import net.siro256yt.nukkitpl.linkbe.database.TmpData;
 import net.siro256yt.nukkitpl.linkbe.util.CodeLength;
+import net.siro256yt.nukkitpl.linkbe.util.Kick;
 import net.siro256yt.nukkitpl.linkbe.util.SecureRandomString;
 
 import java.sql.Timestamp;
@@ -68,13 +68,11 @@ public class PlayerJoinListener implements Listener {
                     TmpData.deleteTmpData(xuid);
                     isCreated = false;
                 } catch (Exception e) {
-                    player.kick("Internal error. Please retry again.", false);
+                    Kick.error(player);
                     e.printStackTrace();
                 }
             } else {
-                    player.kick("Your code: " + TextFormat.RED + searchCode + TextFormat.RESET + "\n" +
-                            "1. Join to " + TextFormat.BLUE + "auth.dev-jp.net" + TextFormat.RESET + " by Java Edition\n" +
-                            "2. Enter a command " + TextFormat.RED + "/auth " + searchCode, false);
+                Kick.normal(player, searchCode);
             }
         }
             if (!isCreated) {
@@ -83,16 +81,14 @@ public class PlayerJoinListener implements Listener {
                     create = true;
                 } catch (Exception e) {
                     e.printStackTrace();
-                    player.kick("Internal error. Please retry again.", false);
+                    Kick.error(player);
                     create = false;
                 }
 
                 if (create) {
-                    player.kick("Your code: " + TextFormat.RED + code + TextFormat.RESET + "\n" +
-                            "1. Join to " + TextFormat.BLUE + "auth.dev-jp.net" + TextFormat.RESET + " by Java Edition\n" +
-                            "2. Enter a command " + TextFormat.RED + "/auth " + code, false);
+                    Kick.normal(player, code);
                 } else {
-                    player.kick("Internal error. Please retry again.", false);
+                    Kick.error(player);
                 }
             }
     }
