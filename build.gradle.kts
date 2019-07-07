@@ -19,7 +19,7 @@ repositories {
 
 dependencies {
     implementation("cn.nukkit:nukkit:1.0-SNAPSHOT")
-    compile("mysql:mysql-connector-java:8.0.16")
+    implementation("mysql:mysql-connector-java:8.0.16")
     testCompile("junit", "junit", "4.12")
 }
 
