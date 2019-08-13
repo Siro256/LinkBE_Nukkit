@@ -27,9 +27,9 @@ configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
 }
 
-tasks.withType<JavaCompile>().configureEach{
+tasks.withType()<JavaCompile>().configureEach{
     options.apply {
-        encoding = "utf-8"
+        var encoding = "utf-8"
     }
 }
 

@@ -23,7 +23,7 @@ public class TmpData {
 
         Class.forName("com.mysql.jdbc.Driver").newInstance();
 
-        Connection conn = DriverManager.getConnection("jdbc:mysql://" + LinkBE.db_host + "/" + LinkBE.db_name + "?user=" + LinkBE.db_user + "&password=" + LinkBE.db_pass);
+        Connection conn = DriverManager.getConnection("jdbc:mysql://" + LinkBE.db_host + ":" + LinkBE.db_port +  "/" + LinkBE.db_name + "?user=" + LinkBE.db_user + "&password=" + LinkBE.db_pass);
 
         PreparedStatement preparedStatement = conn.prepareStatement("INSERT tmpdata VALUES (?, ?, ?)");
 
@@ -55,7 +55,7 @@ public class TmpData {
 
         Class.forName("com.mysql.jdbc.Driver").newInstance();
 
-        Connection conn = DriverManager.getConnection("jdbc:mysql://" + LinkBE.db_host + "/" + LinkBE.db_name + "?user=" + LinkBE.db_user + "&password=" + LinkBE.db_pass);
+        Connection conn = DriverManager.getConnection("jdbc:mysql://" + LinkBE.db_host  + ":" + LinkBE.db_port + "/" + LinkBE.db_name + "?user=" + LinkBE.db_user + "&password=" + LinkBE.db_pass);
 
         PreparedStatement preparedStatement = conn.prepareStatement("SELECT xuid, code, time FROM tmpdata WHERE xuid = ?");
 
@@ -89,7 +89,7 @@ public class TmpData {
     public static int deleteTmpData(String xuid) throws Exception {
         Class.forName("com.mysql.jdbc.Driver").newInstance();
 
-        Connection conn = DriverManager.getConnection("jdbc:mysql://" + LinkBE.db_host + "/" + LinkBE.db_name + "?user=" + LinkBE.db_user + "&password=" + LinkBE.db_pass);
+        Connection conn = DriverManager.getConnection("jdbc:mysql://" + LinkBE.db_host + ":" + LinkBE.db_port + "/" + LinkBE.db_name + "?user=" + LinkBE.db_user + "&password=" + LinkBE.db_pass);
 
         PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM tmpdata WHERE xuid = ?");
 
