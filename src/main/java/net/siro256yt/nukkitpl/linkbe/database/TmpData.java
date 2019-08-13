@@ -8,7 +8,16 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class TmpData {
-    //一時コード作成
+    /**
+     * 認証コードを生成する
+     * @param xuid XUID(XboxのLongID)
+     * @param code 認証コード
+     * @return returnしているが特に必要なし
+     * @throws Exception
+     *
+     * @author Siro_256
+     * @version 1.0.0
+     */
     public static int createTmpData(String xuid, String code) throws Exception {
         Timestamp timestamp = new Timestamp(Calendar.getInstance().getTimeInMillis() - 1000*60*60*24);
 
@@ -29,7 +38,15 @@ public class TmpData {
         return resultSet;
     }
 
-    //一時コードを取得
+    /**
+     * DBからデータを取得する
+     * @param xuid XUID(XboxのLongID)
+     * @return HashMapを返す resultCode->認証コード resultTime->DBに保存されている時間 resultTimeString->DB保存されている時間をStringにしたもの
+     * @throws Exception
+     *
+     * @author Siro_256
+     * @version 1.0.0
+     */
     public static HashMap<String, String> searchTmpData(String xuid) throws Exception {
         HashMap<String, String> searchData = new HashMap<String, String>();
         String resultCode = null;
@@ -60,7 +77,15 @@ public class TmpData {
         return searchData;
     }
 
-    //一時コードを削除
+    /**
+     * DBに保存されているデータを削除する
+     * @param xuid XUID(XboxのLongID)
+     * @return returnしているが特に必要なし
+     * @throws Exception
+     *
+     * @author Siro_256
+     * @version 1.0.0
+     */
     public static int deleteTmpData(String xuid) throws Exception {
         Class.forName("com.mysql.jdbc.Driver").newInstance();
 
